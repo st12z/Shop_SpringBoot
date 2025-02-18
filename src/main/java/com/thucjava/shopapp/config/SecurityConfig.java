@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -34,12 +35,17 @@ public class SecurityConfig {
         return http
                 .csrf(customizer->customizer.disable())
                 .authorizeHttpRequests(request->
-                        request.requestMatchers("/payment/processing",
+                        request
+                                .requestMatchers("/payment/processing",
                                         "/order/**",
                                         "/user/detail",
                                         "/user/change-user",
                                         "/user/change-password",
                                         "/review/**").authenticated()
+                                .requestMatchers(HttpMethod.GET,"/admin/detail").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority("READ")
+                                .requestMatchers(HttpMethod.POST,"admin/**").hasAnyAuthority("UPDATE")
+                                .requestMatchers(HttpMethod.POST,"admin/**").hasAuthority("DELETE")
                                 .requestMatchers("/admin/**").hasAnyRole("ADMIN","MANAGER","STAFF")
                         .anyRequest().permitAll())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

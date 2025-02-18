@@ -11,4 +11,6 @@ public interface RoleRepo extends JpaRepository<Role, Long> {
     List<Role> findByIdNot(Long id);
 
     List<Role> findByIdIn(List<Long> roleIds);
+
+    Role findByName(String permission);
 }
