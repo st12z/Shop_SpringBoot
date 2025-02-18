@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class JwtServiceImpl implements JwtService {
+public class                                    JwtServiceImpl implements JwtService {
     private final JwtProperties jwtProperties;
     private final UserRepo userRepo;
     private final RefreshTokenRepo refreshTokenRepo;

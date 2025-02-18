@@ -18,6 +18,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,6 +32,7 @@ public class UserController {
     private final UserService userService;
     private final SendMail mail;
     private final ResetTokenService resetTokenService;
+    private final KafkaTemplate<String, String> kafkaTemplate;
     @PostMapping("/register")
     public ResponseData<?> register(@RequestBody @Valid UserRequestDTO user) {
         try{
@@ -88,7 +90,7 @@ public class UserController {
             String content = "<p>Mã OTP của bạn là :<strong>"+token+"</strong></p>" +
                     "<p>Thời gian hết hạn :<strong>10 phút</strong></p>" +
                     "<p>Vui lòng nhấn vào link sau để reset password: <a href=http://localhost:3000/otp-password?email="+email+">Reset Password</a></p>";
-            mail.sendMail(email,content,"Reset Password");
+            kafkaTemplate.send("confirm-email-topic",String.format("%s,%s,%s",email,content,"Reset password"));
             return new ResponseData<>(HttpStatus.OK.value(), "Đã gửi mã OTP",email);
         }catch (Exception e){
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage());

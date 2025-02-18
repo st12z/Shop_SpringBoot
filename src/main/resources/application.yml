@@ -4,16 +4,16 @@ spring:
     name: shopapp
 
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/shopweb}
+    username: ${SPRING_DATASOURCE_USERNAME:root}
+    password: ${SPRING_DATASOURCE_PASSWORD:Anhthucdz123@}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jwt:
-    expiryMinute: ${EXPIRY_MINUTE}
-    expiryHour: ${EXPIRY_HOUR}
+    expiryMinute: ${EXPIRY_MINUTE:60}
+    expiryHour: ${EXPIRY_HOUR:5}
     expiryDay: 14
-    accessKey: ${ACCESS_KEY}
-    refreshKey: ${REFRESH_KEY}
+    accessKey: ${ACCESS_KEY:c2VjcmV0QGtleS5hcGlfaGFzX2JlZW5fZGVzaWduZWRfYnlfVGF5TFE=}
+    refreshKey: ${REFRESH_KEY:9k1jJAWAKQCnCEz1pwcPNegbHoLugf9hgEnn6sz5pFc=}
   jpa:
     hibernate:
       ddl-auto: update  # Các giá trị có thể là none, create, update, create-drop
@@ -25,15 +25,16 @@ spring:
     show-sql: true
   data:
     redis:
-      host: ${REDIS_HOST}
-      port: ${REDIS_PORT}
-
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  kafka:
+    bootstrap-servers: localhost:9092
 
   mail:
-    host: ${MAIL_HOST}
-    username: ${MAIL_USERNAME}
-    password: ${MAIL_PASSWORD}
-    port: ${MAIL_PORT}
+    host: ${MAIL_HOST:smtp.gmail.com}
+    username: ${MAIL_USERNAME:ckp2004vn@gmail.com}
+    password: ${MAIL_PASSWORD:kltqohttmkznubrc}
+    port: ${MAIL_PORT:587}
     properties:
       smtp:
         auth: true
@@ -51,15 +52,15 @@ spring:
       static-locations: file:///C:/Users/T/Desktop/images/
 app:
   cors:
-    allowed-origin: ${API_CROSS}
+    allowed-origin: ${API_CROSS:http://localhost:3000}
 payment:
   vnpay:
-    vnp_PayUrl: ${PAY_URL}
-    vnp_TmnCode: ${TMN_CODE}
-    secretKey: ${SECRET_KEY}
-    vnp_ReturnUrl: ${RETURN_URL}
-    vnp_Version: ${VERSION}
-    vnp_Command: ${COMMAND}
-    orderType: ${ORDER_TYPE}
+    vnp_PayUrl: ${PAY_URL:https://sandbox.vnpayment.vn/paymentv2/vpcpay.html}
+    vnp_TmnCode: ${TMN_CODE:58X4B4HP}
+    secretKey: ${SECRET_KEY:VRLDWNVWDNPCOEPBZUTWSEDQAGXJCNGZ}
+    vnp_ReturnUrl: ${RETURN_URL:http://localhost:8080/payment/vn-pay-callback}
+    vnp_Version: ${VERSION:2.1.0}
+    vnp_Command: ${COMMAND:pay}
+    orderType: ${ORDER_TYPE:other}
 debug: true
 

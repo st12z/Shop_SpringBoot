@@ -49,5 +49,11 @@ public class User extends BaseEntity{
         inverseJoinColumns = @JoinColumn(name="room_chat_id")
     )
     private List<RoomChat> roomChats;
+    @ManyToMany(fetch = FetchType.LAZY,cascade=CascadeType.PERSIST)
+    @JoinTable(name = "user_discount",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="discount_id")
+    )
+    private List<Discount> discounts;
 
 }

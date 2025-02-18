@@ -110,4 +110,16 @@ public class Converter {
                 .dateSend(message.getTimestamp())
                 .build();
     }
+
+    public static DiscountResponse toDiscountResponse(Discount discount) {
+        return DiscountResponse.builder()
+                .id(discount.getId())
+                .image(discount.getImage())
+                .value(discount.getValue())
+                .description(discount.getDescription())
+                .quantity(discount.getQuantity())
+                .name(discount.getName())
+                .active(discount.getActive())
+                .build();
+    }
 }
