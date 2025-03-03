@@ -23,7 +23,7 @@ public class HomeController {
     public ResponseData<?> getProductsBySearch(@RequestParam(value = "search",required = false,defaultValue = "") String search) {
         log.info("getProductsBySearch");
         try{
-            List<ProductResponse> result=productService.getAllProductsCriteriaBySearch(search);
+            List<ProductResponse> result=productService.getAllProductsBySearch(search);
             return new ResponseData<>(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), result);
         }catch (Exception e){
             log.error(e.getMessage());

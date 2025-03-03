@@ -18,8 +18,11 @@ import java.util.function.Consumer;
 @NoArgsConstructor
 public class ProductSearchCriteriaImpl implements Consumer<FilterCriteria> {
     private CriteriaBuilder builder;
+    // Thêm diều kiện sql
     private List<Predicate> predicates;
+    // Add tất cả điều kiện
     private Root<Product> root;
+    // root để lấy tên trường field
     @Override
     public void accept(FilterCriteria param) {
         if(param.getOperation().equalsIgnoreCase(">")) {

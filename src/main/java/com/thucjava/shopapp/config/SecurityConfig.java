@@ -42,10 +42,6 @@ public class SecurityConfig {
                                         "/user/change-user",
                                         "/user/change-password",
                                         "/review/**").authenticated()
-                                .requestMatchers(HttpMethod.GET,"/admin/detail").permitAll()
-                                .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority("READ")
-                                .requestMatchers(HttpMethod.POST,"admin/**").hasAnyAuthority("UPDATE")
-                                .requestMatchers(HttpMethod.POST,"admin/**").hasAuthority("DELETE")
                                 .requestMatchers("/admin/**").hasAnyRole("ADMIN","MANAGER","STAFF")
                         .anyRequest().permitAll())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -90,7 +90,7 @@ public class UserController {
             String content = "<p>Mã OTP của bạn là :<strong>"+token+"</strong></p>" +
                     "<p>Thời gian hết hạn :<strong>10 phút</strong></p>" +
                     "<p>Vui lòng nhấn vào link sau để reset password: <a href=http://localhost:3000/otp-password?email="+email+">Reset Password</a></p>";
-            kafkaTemplate.send("confirm-email-topic",String.format("%s,%s,%s",email,content,"Reset password"));
+            kafkaTemplate.send("confirm-email-topic", String.format("%s,%s,%s", email, content, "Reset password"));
             return new ResponseData<>(HttpStatus.OK.value(), "Đã gửi mã OTP",email);
         }catch (Exception e){
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage());

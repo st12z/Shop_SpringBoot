@@ -163,7 +163,9 @@ public class ProductServiceImpl implements ProductService {
         Root<Product> root = query.from(Product.class);
         List<Predicate> predicateList=new ArrayList<>();
         ProductSearchCriteriaImpl queryConsumer = new ProductSearchCriteriaImpl(criteriaBuilder,predicateList,root);
-        criteriaList.forEach(queryConsumer);
+        for(FilterCriteria criteria:criteriaList){
+            queryConsumer.accept(criteria);
+        }
         Predicate predicate =criteriaBuilder.or(predicateList.toArray(new Predicate[0]));
         query.where(predicate);
         // join

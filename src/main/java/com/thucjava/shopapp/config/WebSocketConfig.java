@@ -17,7 +17,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         // thiết lập kết nối, cho phép sử dụng giao thức stomp
         // end point để client sẽ kết nối WebSocket Server tại http://localhost:8080/chat
     }
-
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         // endponit client gửi tin nhắn đến server
