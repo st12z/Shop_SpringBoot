@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan
+
 public class ShopappApplication {
 
 	public static void main(String[] args) {
