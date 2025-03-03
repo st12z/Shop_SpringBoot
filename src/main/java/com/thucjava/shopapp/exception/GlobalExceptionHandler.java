@@ -33,8 +33,8 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimestamp(new Date());
         errorResponse.setPath(webRequest.getDescription(false).replace("uri=",""));
-        errorResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        errorResponse.setError(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
+        errorResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setError(HttpStatus.BAD_REQUEST.getReasonPhrase());
         errorResponse.setMessage(e.getMessage());
         return errorResponse;
     }
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
         errorResponse.setPath(webRequest.getDescription(false).replace("uri=",""));
         errorResponse.setStatus(HttpStatus.NOT_FOUND.value());
         errorResponse.setMessage(e.getMessage());
-        errorResponse.setError(HttpStatus.BAD_REQUEST.getReasonPhrase());
+        errorResponse.setError(HttpStatus.NOT_FOUND.getReasonPhrase());
         return errorResponse;
     }
     @ResponseStatus(HttpStatus.CONFLICT)
@@ -55,8 +55,8 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setTimestamp(new Date());
         errorResponse.setPath(webRequest.getDescription(false).replace("uri=",""));
-        errorResponse.setStatus(HttpStatus.FOUND.value());
-        errorResponse.setError(HttpStatus.FOUND.getReasonPhrase());
+        errorResponse.setStatus(HttpStatus.CONFLICT.value());
+        errorResponse.setError(HttpStatus.CONFLICT.getReasonPhrase());
         errorResponse.setMessage(e.getMessage());
         return errorResponse;
     }
